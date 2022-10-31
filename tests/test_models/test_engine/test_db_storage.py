@@ -68,7 +68,7 @@ test_db_storage.py'])
                             "{:s} method needs a docstring".format(func[0]))
 
     def test_db_storage_get(self):
-        """ test get """
+        """ test get so that it won't fail when update in the future"""
         DBStorage().reload()
         sta_name = State(name='Alabama')
         DBStorage().new(sta_name)
@@ -77,32 +77,13 @@ test_db_storage.py'])
         self.assertEqual(type(result_get), State)
 
     def test_db_storage_count(self):
-        """ test count """
+        """ test count so that it won't fail when update in the future"""
         DBStorage().reload()
         cont = DBStorage().count()
         sta_name = State(name='Alabama')
         DBStorage().new(sta_name)
         DBStorage().save()
         self.assertEqual(cont + 1, DBStorage().count())
-
-    def test_db_storage_get(self):
-        """ test get """
-        DBStorage().reload()
-        sta_name = State(name='Alabama')
-        DBStorage().new(sta_name)
-        DBStorage().save()
-        result_get = DBStorage().get(State, sta_name.id)
-        self.assertEqual(type(result_get), State)
-
-    def test_db_storage_count(self):
-        """ test count """
-        DBStorage().reload()
-        cont = DBStorage().count()
-        sta_name = State(name='Alabama')
-        DBStorage().new(sta_name)
-        DBStorage().save()
-        self.assertEqual(cont + 1, DBStorage().count())
-
 
 class TestFileStorage(unittest.TestCase):
     """Test the FileStorage class"""
